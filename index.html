@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="./style.css">
+    <title>Document</title>
+    <script>
+        function primeira() {
+            document.write('<h1>primeira função executada</h1>')
+        }
+         let decider = false
+        function dark(){
+            let h = document.getElementById('h1_1')
+            h.style.color='white'
+            let d = document.getElementById('div_1')
+            d.style.backgroundColor='#2a2a2a'
+            h.innerText='javascript dark'
+            let b = document.getElementById('b_1')
+            b.style.backgroundColor='white'
+            b.style.color='#2a2a2a'
+            decider=!decider
+        }
+        function light(){
+            let h = document.getElementById('h1_1')
+            h.style.color='#2a2a2a'
+            h.innerText='javascript light'
+
+            let d = document.getElementById('div_1')
+            d.style.backgroundColor='white'
+            let b = document.getElementById('b_1')
+            b.style.backgroundColor='#2a2a2a'
+            b.style.color='white'
+            decider=!decider
+
+        }
+       
+
+        function vinculaEvento(){
+            document.getElementById('b_1').addEventListener('click', ()=>{decider==false?dark():light()})
+        }
+        window.addEventListener('load', vinculaEvento)
+    </script>
+</head>
+
+<body>
+    <div id = 'div_1'>
+
+        <h1 id = 'h1_1'>inicial</h1>
+        <!-- <script>
+        primeira()
+    </script> -->
+        <button id = 'b_1'>
+            button
+        </button>
+    </div>
+</body>
+
+</html>

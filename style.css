@@ -1,0 +1,23 @@
+div{
+    /* color : blue; */
+    background-color: rgb(233, 233, 233);
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+    width: 50%;
+    text-align: center;
+    padding: 2%;
+    border-radius: 15px;
+}
+body{
+    background-color: rgb(156, 194, 194);
+    align-items: center;
+    justify-items: center;
+}
+button{
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    
+}
