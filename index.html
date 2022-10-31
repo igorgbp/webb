@@ -1,60 +1,132 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
+
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href="./style.css">
+
     <title>Document</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- <script src="index.js"></script> -->
+
     <script>
-        function primeira() {
-            document.write('<h1>primeira função executada</h1>')
-        }
-         let decider = false
-        function dark(){
-            let h = document.getElementById('h1_1')
-            h.style.color='white'
-            let d = document.getElementById('div_1')
-            d.style.backgroundColor='#2a2a2a'
-            h.innerText='javascript dark'
-            let b = document.getElementById('b_1')
-            b.style.backgroundColor='white'
-            b.style.color='#2a2a2a'
-            decider=!decider
-        }
-        function light(){
-            let h = document.getElementById('h1_1')
-            h.style.color='#2a2a2a'
-            h.innerText='javascript light'
+        window.addEventListener('load', () => {
 
-            let d = document.getElementById('div_1')
-            d.style.backgroundColor='white'
-            let b = document.getElementById('b_1')
-            b.style.backgroundColor='#2a2a2a'
-            b.style.color='white'
-            decider=!decider
+            document.getElementById('estado').addEventListener('change', () => {
 
-        }
-       
+                const estado = document.getElementById('estado').value;
 
-        function vinculaEvento(){
-            document.getElementById('b_1').addEventListener('click', ()=>{decider==false?dark():light()})
-        }
-        window.addEventListener('load', vinculaEvento)
+                fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados/' + estado + '/municipios')
+
+                    .then((response) => {
+
+                        return response.json();
+
+                    })
+
+                    .then((json) => {
+
+                        let cidades = document.getElementById('cidade');
+
+                        cidade.innerHTML = '';
+
+                        for (let i = 0; i < json.length; i++) {
+
+                            let option = document.createElement('option');
+
+                            option.innerText = json[i].nome;
+
+                            cidades.append(option)
+
+                        }
+
+                    })
+
+            });
+
+
+
+
+
+
+            document.getElementById('bn').addEventListener('click', () => {
+                const dados = new FormData(document.forms[0]);
+                alert('adf')
+                const config = {
+                    method: 'POST',
+                    body: dados
+                }
+                fetch('./cadastro.php', config)
+                    .then((response) => {
+                        return response.text();
+                        alert('aquiii')
+                    })
+                    .then((text) => {
+                        alert(text)
+                        alert('asdf')
+                    })
+            })
+            document.forms[0].addEventListener('submit', (event) => {
+
+                event.preventDefault();
+
+            });
+
+        })
     </script>
+
 </head>
 
-<body>
-    <div id = 'div_1'>
 
-        <h1 id = 'h1_1'>inicial</h1>
-        <!-- <script>
-        primeira()
-    </script> -->
-        <button id = 'b_1'>
-            button
-        </button>
-    </div>
+
+<body>
+
+
+
+
+
+    <form action="">
+
+        <label for="nome">Nome</label> <br>
+
+        <input type=" text" name="nome" id="name"> <br>
+
+        <label for="endereco">Endereço</label> <br>
+
+        <input type="text" name="endereco" id="endereco"><br>
+
+        <label for="estado">Estado</label>
+
+        <select name="estado" id="estado">
+
+            <option value="MG">Minas Gerais</option>
+
+            <option value="RJ">Rio De Janeiro</option>
+
+            <option value="SP">São Paulo</option>
+
+        </select>
+
+        <br>
+
+        <label for="cidade">Cidade</label>
+
+        <select name="cidade" id="cidade">
+
+        </select>
+
+        <button id='bn'>Salvar</button>
+
+        <br>
+
+    </form>
+
 </body>
 
-</html>
